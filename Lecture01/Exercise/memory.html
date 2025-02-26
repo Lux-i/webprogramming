@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center my-4">Memory Game</h1>
+      <h2 id="timetracker"></h2>
+      <h2 id="turntracker"></h2>
+      <div id="game-board" class="row justify-content-center">
+        <div class="card" id="1" onclick="flipCard(1, '🎶')">?</div>
+        <div class="card" id="2" onclick="flipCard(2, '😁')">?</div>
+        <div class="card" id="3" onclick="flipCard(3, '🎂')">?</div>
+        <div class="card" id="4" onclick="flipCard(4, '🎂')">?</div>
+        <div class="card" id="5" onclick="flipCard(5, '❤')">?</div>
+        <div class="card" id="6" onclick="flipCard(6, '😁')">?</div>
+        <div class="card" id="7" onclick="flipCard(7, '🎶')">?</div>
+        <div class="card" id="8" onclick="flipCard(8, '❤')">?</div>
+      </div>
+    </div>
+    <script>
+      let startTime = Date.now();
+      let lastFound = null;
+      let lastSymbol = null;
+      let onTimeout = false;
+      const neededPairs = 4;
+      let foundPairs = 0;
+      let turns = 0;
+
+      const flipCard = (id, symbol) => {
+        if (!onTimeout) {
+          const card = document.getElementById(id);
+          if (!card.classList.contains("flipped")) {
+            card.classList.add("flipped");
+            card.innerHTML = symbol;
+            if (!lastFound) {
+              lastFound = card;
+              lastSymbol = symbol;
+            } else if (lastSymbol == symbol) {
+              card.classList.add("found");
+              lastFound.classList.add("found");
+              lastFound = null;
+              foundPairs++;
+              turns++;
+              //#region game end
+              if (foundPairs == neededPairs) {
+                //show finish time
+                const timeTaken = Date.now() - startTime;
+                document.getElementById(
+                  "timetracker"
+                ).innerHTML = `Zeit gebraucht: ${Math.round(
+                  timeTaken / 1000
+                )}s`;
+                document.getElementById(
+                  "turntracker"
+                ).innerHTML = `Züge gebraucht: ${turns}`;
+                //reset counters
+                foundPairs = 0;
+                turns = 0;
+                //reset board
+                document
+                  .getElementById("1")
+                  .classList.remove("flipped", "found");
+                document.getElementById("1").innerHTML = "?";
+                document
+                  .getElementById("2")
+                  .classList.remove("flipped", "found");
+                document.getElementById("2").innerHTML = "?";
+                document
+                  .getElementById("3")
+                  .classList.remove("flipped", "found");
+                document.getElementById("3").innerHTML = "?";
+                document
+                  .getElementById("4")
+                  .classList.remove("flipped", "found");
+                document.getElementById("4").innerHTML = "?";
+                document
+                  .getElementById("5")
+                  .classList.remove("flipped", "found");
+                document.getElementById("5").innerHTML = "?";
+                document
+                  .getElementById("6")
+                  .classList.remove("flipped", "found");
+                document.getElementById("6").innerHTML = "?";
+                document
+                  .getElementById("7")
+                  .classList.remove("flipped", "found");
+                document.getElementById("7").innerHTML = "?";
+                document
+                  .getElementById("8")
+                  .classList.remove("flipped", "found");
+                document.getElementById("8").innerHTML = "?";
+                //reset startTime
+                startTime = Date.now();
+              }
+              //#endregion
+            } else {
+              turns++;
+              onTimeout = true;
+              setTimeout(() => {
+                card.classList.remove("flipped");
+                card.innerHTML = "?";
+                lastFound.classList.remove("flipped");
+                lastFound.innerHTML = "?";
+                lastFound = null;
+                onTimeout = false;
+              }, 1000);
+            }
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

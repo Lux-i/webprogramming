@@ -1,0 +1,32 @@
+body {
+  background-color: #f8f9fa;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 10px;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  user-select: none;
+  transition: transform ease-in-out 0.4s;
+}
+
+.card.flipped {
+  transform: scale(1.05);
+}
+
+.card.found {
+  background-color: #28a745;
+}

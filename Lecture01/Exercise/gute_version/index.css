@@ -1,0 +1,116 @@
+:root {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  width: 100%;
+  height: 15vh;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0.5rem;
+}
+
+header h2 {
+  margin: 0.5rem;
+}
+
+game {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#cards_container {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+Card {
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.4rem;
+  border: 0px;
+  border-radius: 1em;
+  transition: background-color ease-in-out 0.4s;
+  transition: transform ease-in-out 0.4s;
+  background-color: lightskyblue;
+}
+
+Card.found {
+  background-color: green !important;
+}
+
+Card.flipped {
+  background-color: rgb(71, 174, 208);
+  transform: scale(1.1);
+}
+
+Card:not(.flipped)::before {
+  content: "❓";
+  align-self: center;
+  font-size: xx-large;
+}
+
+Card p {
+  color: white;
+  transition: display ease-in-out 0.6s;
+  margin: 0;
+  text-align: center;
+  font-size: xx-large;
+  display: none;
+}
+
+card.flipped p {
+  display: inline;
+}
+
+card.wrong {
+  background-color: rgb(255, 60, 0) !important;
+}
+
+#restart {
+  background-color: blue;
+  width: 20rem;
+  height: 5rem;
+  border: none;
+  border-radius: 5rem;
+  transition: transform 0.4s ease;
+  color: white;
+  font-size: xx-large;
+}
+
+#restart:hover {
+  transform: scale(0.9);
+}
+
+#overlay {
+  position: absolute;
+  width: 100vw;
+  top: 15vh;
+  bottom: 0vh;
+  background-color: rgba(9, 236, 221, 0.5);
+  backdrop-filter: blur(0.2rem);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
