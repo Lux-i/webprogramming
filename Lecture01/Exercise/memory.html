@@ -13,8 +13,8 @@
   <body>
     <div class="container">
       <h1 class="text-center my-4">Memory Game</h1>
-      <h2 id="timetracker"></h2>
-      <h2 id="turntracker"></h2>
+      <h2 id="timetracker" class="text-center"></h2>
+      <h2 id="turntracker" class="text-center"></h2>
       <div id="game-board" class="row justify-content-center">
         <div class="card" id="1" onclick="flipCard(1, '🎶')">?</div>
         <div class="card" id="2" onclick="flipCard(2, '😁')">?</div>
@@ -25,6 +25,7 @@
         <div class="card" id="7" onclick="flipCard(7, '🎶')">?</div>
         <div class="card" id="8" onclick="flipCard(8, '❤')">?</div>
       </div>
+      <h1 id="wintext" class="text-center"></h1>
     </div>
     <script>
       let startTime = Date.now();
@@ -62,44 +63,8 @@
                 document.getElementById(
                   "turntracker"
                 ).innerHTML = `Züge gebraucht: ${turns}`;
-                //reset counters
-                foundPairs = 0;
-                turns = 0;
-                //reset board
-                document
-                  .getElementById("1")
-                  .classList.remove("flipped", "found");
-                document.getElementById("1").innerHTML = "?";
-                document
-                  .getElementById("2")
-                  .classList.remove("flipped", "found");
-                document.getElementById("2").innerHTML = "?";
-                document
-                  .getElementById("3")
-                  .classList.remove("flipped", "found");
-                document.getElementById("3").innerHTML = "?";
-                document
-                  .getElementById("4")
-                  .classList.remove("flipped", "found");
-                document.getElementById("4").innerHTML = "?";
-                document
-                  .getElementById("5")
-                  .classList.remove("flipped", "found");
-                document.getElementById("5").innerHTML = "?";
-                document
-                  .getElementById("6")
-                  .classList.remove("flipped", "found");
-                document.getElementById("6").innerHTML = "?";
-                document
-                  .getElementById("7")
-                  .classList.remove("flipped", "found");
-                document.getElementById("7").innerHTML = "?";
-                document
-                  .getElementById("8")
-                  .classList.remove("flipped", "found");
-                document.getElementById("8").innerHTML = "?";
-                //reset startTime
-                startTime = Date.now();
+                document.getElementById("wintext").innerHTML =
+                  "Du hast gewonnen! Lade die Seite neu um nochmal zu spielen.";
               }
               //#endregion
             } else {
