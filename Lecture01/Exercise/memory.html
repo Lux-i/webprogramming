@@ -41,7 +41,7 @@
           const card = document.getElementById(id);
           if (!card.classList.contains("flipped")) {
             card.classList.add("flipped");
-            card.innerHTML = symbol;
+            card.textContent = symbol;
             if (!lastFound) {
               lastFound = card;
               lastSymbol = symbol;
@@ -57,13 +57,13 @@
                 const timeTaken = Date.now() - startTime;
                 document.getElementById(
                   "timetracker"
-                ).innerHTML = `Zeit gebraucht: ${Math.round(
+                ).textContent = `Zeit gebraucht: ${Math.round(
                   timeTaken / 1000
                 )}s`;
                 document.getElementById(
                   "turntracker"
-                ).innerHTML = `Züge gebraucht: ${turns}`;
-                document.getElementById("wintext").innerHTML =
+                ).textContent = `Züge gebraucht: ${turns}`;
+                document.getElementById("wintext").textContent =
                   "Du hast gewonnen! Lade die Seite neu um nochmal zu spielen.";
               }
               //#endregion
@@ -72,9 +72,9 @@
               onTimeout = true;
               setTimeout(() => {
                 card.classList.remove("flipped");
-                card.innerHTML = "?";
+                card.textContent = "?";
                 lastFound.classList.remove("flipped");
-                lastFound.innerHTML = "?";
+                lastFound.textContent = "?";
                 lastFound = null;
                 onTimeout = false;
               }, 1000);
