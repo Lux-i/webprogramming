@@ -56,6 +56,17 @@ Card {
   background-color: lightskyblue;
 }
 
+Card:not(.flipped):hover {
+  box-shadow: 0 0 1rem 0.1rem rgba(9, 236, 221, 0.5);
+  cursor: url("custom_cursor.svg") 10 0, pointer;
+}
+
+Card:not(.flipped)::before {
+  content: "❓";
+  align-self: center;
+  font-size: xx-large;
+}
+
 Card.found {
   background-color: green !important;
 }
@@ -63,12 +74,6 @@ Card.found {
 Card.flipped {
   background-color: rgb(71, 174, 208);
   transform: scale(1.1);
-}
-
-Card:not(.flipped)::before {
-  content: "❓";
-  align-self: center;
-  font-size: xx-large;
 }
 
 Card p {
