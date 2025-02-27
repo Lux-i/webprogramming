@@ -92,7 +92,8 @@ restart_button.onclick = () => {
   cards = Array.from(cards_container.children);
   for (i = 0; i < cardAmount; i++) {
     cards[i].classList.remove("flipped", "found");
-    cards[i].innerHtml = shuffledArray[i];
+    const cardText = cards[i].firstChild;
+    cardText.innerHTML = shuffledArray[i];
   }
   overlay.style.display = "none";
   pairsFound = 0;
