@@ -1,0 +1,11 @@
+.key {
+  width: 7rem;
+  height: 15rem;
+  background-color: rgb(251, 251, 251);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.01px solid black;
+  margin: 0 0.1rem 0 0.1rem;
+  border-radius: 1rem;
+}
