@@ -5,7 +5,7 @@ const overlay = document.getElementById("overlay");
 const restart_button = document.getElementById("restart");
 
 const cardAmount = 16;
-const cardIcons = ["💯", "💸", "🤣", "💀", "🤮", "❤", "🎂", "🎶"];
+const cardIcons = ["💯", "💸", "🤣", "💀", "🤮", "❤", "🎶", "🔥"];
 
 /**
  * @param {Array<String>} arr
