@@ -1,5 +1,5 @@
 /**
- * @return {Array<Object>} an array of keyData objects
+ * @return {Array<{key: String, note: String}>} an array of keyData objects
  */
 const loadNotes = async () => {
   try {
@@ -15,6 +15,10 @@ const loadNotes = async () => {
 };
 
 //globals
+/**
+ * songs array
+ * @type {Array<{songName: String, notes: Array<String>}>}
+ */
 const songs = [];
 let songLock = false;
 const noteLine = document.getElementById("noteLine");
