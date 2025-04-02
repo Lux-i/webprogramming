@@ -2,8 +2,29 @@
   {
     "category": "Math",
     "question": "What is 2 + 2?",
-    "options": [2, 3, 4, 5],
-    "answer": 4,
+    "options": ["2", "3", "4", "5"],
+    "answer": "4",
     "difficulty": "easy"
-  }
+  },
+  {
+    "category": "Geography",
+    "question": "In what country is the city Düsseldorf",
+    "options": [
+      "United States of America",
+      "Switzerland",
+      "Madagascar",
+      "Germany"
+    ],
+    "answer": "Germany",
+    "difficulty": "easy"
+  },
+  {
+    "category": "General knowledge",
+    "question": "TomatenBot uses ____ as it's database",
+    "options": ["MySQL", "PostgreSQL", "MongoDB", "MariaDB"],
+    "answer": "MongoDB",
+    "difficulty": "hard"
+  },
+  {},
+  {}
 ]
