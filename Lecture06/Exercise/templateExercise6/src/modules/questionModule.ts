@@ -16,7 +16,6 @@ export class QuestionModule {
 
   async QuestionModule() {
     this.fetchQuestions();
-    this.connectToSatellite();
   }
 
   //#region fetching utility
@@ -51,33 +50,5 @@ export class QuestionModule {
 
   getQuestion(): Question {
     return this.questions[Math.random()];
-  }
-
-  private initVectors() {
-    let v1 = [2, 3, 7];
-    let v2 = [0, 1, 1];
-    let v3 = [2, 0, 5];
-    this.calculatePerformanceMatrix(v1, v2, v3);
-  }
-
-  private calculatePerformanceMatrix(
-    v1: Array<number>,
-    v2: Array<number>,
-    v3: Array<number>
-  ) {
-    let matrix: Array<Array<number>> = [];
-    matrix[0] = v1;
-    matrix[1] = v2;
-    matrix[2] = v3;
-  }
-
-  private async connectToSatellite() {
-    const satLink =
-      (await (await fetch("/api/sat/getReadyInstance")).json()) ||
-      "fgH5vgswjDh2h";
-    const connection = new WebSocket(`/api/connect?type=sat&satId=${satLink}`);
-    connection.onopen = () => {
-      alert(`Debug: Connected to ${satLink}`);
-    };
   }
 }
