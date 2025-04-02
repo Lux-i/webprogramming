@@ -1,30 +1,210 @@
 [
   {
     "category": "Math",
-    "question": "What is 2 + 2?",
-    "options": ["2", "3", "4", "5"],
-    "answer": "4",
-    "difficulty": "easy"
+    "question": "What is 15 ÷ 3?",
+    "options": ["3", "4", "5", "6"],
+    "answer": 2,
+    "difficulty": 0
   },
   {
     "category": "Geography",
-    "question": "In what country is the city Düsseldorf",
-    "options": [
-      "United States of America",
-      "Switzerland",
-      "Madagascar",
-      "Germany"
-    ],
-    "answer": "Germany",
-    "difficulty": "easy"
+    "question": "Which country has the largest population?",
+    "options": ["USA", "India", "China", "Brazil"],
+    "answer": 2,
+    "difficulty": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the chemical symbol for Gold?",
+    "options": ["Ag", "Au", "Pb", "Fe"],
+    "answer": 1,
+    "difficulty": 0
+  },
+  {
+    "category": "History",
+    "question": "Who was the first president of the United States?",
+    "options": ["Thomas Jefferson", "John Adams", "George Washington", "Abraham Lincoln"],
+    "answer": 2,
+    "difficulty": 0
+  },
+  {
+    "category": "Technology",
+    "question": "What does CPU stand for?",
+    "options": ["Central Processing Unit", "Computer Personal Unit", "Central Process Utility", "Control Processing Unit"],
+    "answer": 0,
+    "difficulty": 0
   },
   {
     "category": "General knowledge",
-    "question": "TomatenBot uses ____ as it's database",
-    "options": ["MySQL", "PostgreSQL", "MongoDB", "MariaDB"],
-    "answer": "MongoDB",
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "answer": 1,
+    "difficulty": 0
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are on a standard soccer team on the field?",
+    "options": ["9", "10", "11", "12"],
+    "answer": 2,
+    "difficulty": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which band recorded the song 'Bohemian Rhapsody'?",
+    "options": ["The Beatles", "Queen", "Pink Floyd", "Led Zeppelin"],
+    "answer": 1,
+    "difficulty": 0
+  },
+  {
+    "category": "Literature",
+    "question": "Who wrote '1984'?",
+    "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "J.K. Rowling"],
+    "answer": 1,
+    "difficulty": 1
+  },
+  {
+    "category": "Movies",
+    "question": "In which movie does the character 'Darth Vader' first appear?",
+    "options": [
+      "Star Wars: A New Hope",
+      "Star Wars: The Empire Strikes Back",
+      "Star Wars: Return of the Jedi",
+      "Star Wars: The Phantom Menace"
+    ],
+    "answer": 0,
+    "difficulty": 0
+  },
+  {
+    "category": "Science",
+    "question": "What is the powerhouse of the cell?",
+    "options": ["Nucleus", "Ribosome", "Mitochondrion", "Endoplasmic reticulum"],
+    "answer": 2,
+    "difficulty": 0
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the longest river in the world?",
+    "options": ["Amazon", "Nile", "Yangtze", "Mississippi"],
+    "answer": 1,
+    "difficulty": 1
+  },
+  {
+    "category": "History",
+    "question": "Which year did World War II end?",
+    "options": ["1943", "1944", "1945", "1946"],
+    "answer": 2,
+    "difficulty": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which country won the FIFA World Cup in 2018?",
+    "options": ["Germany", "Argentina", "Brazil", "France"],
+    "answer": 3,
+    "difficulty": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the name of the theoretical particle that mediates the force of gravity?",
+    "options": ["Photon", "Gluon", "Graviton", "Higgs boson"],
+    "answer": 2,
     "difficulty": "hard"
   },
-  {},
-  {}
+  {
+    "category": "History",
+    "question": "In what year did the Byzantine Empire fall?",
+    "options": ["1453", "1492", "1517", "1618"],
+    "answer": 0,
+    "difficulty": "hard"
+  },
+  {
+    "category": "Technology",
+    "question": "Which cryptographic algorithm is considered to be broken due to Shor's algorithm?",
+    "options": ["AES", "RSA", "SHA-256", "Blowfish"],
+    "answer": 1,
+    "difficulty": "hard"
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the least densely populated country in the world?",
+    "options": ["Australia", "Namibia", "Mongolia", "Iceland"],
+    "answer": 2,
+    "difficulty": "hard"
+  },
+  {
+    "category": "General knowledge",
+    "question": "Which philosopher wrote 'Being and Time'?",
+    "options": ["Friedrich Nietzsche", "Martin Heidegger", "Jean-Paul Sartre", "Immanuel Kant"],
+    "answer": 1,
+    "difficulty": "hard"
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Montreal", "Ottawa"],
+    "answer": 3,
+    "difficulty": 1
+  },
+  {
+    "category": "Literature",
+    "question": "Which author wrote 'The Great Gatsby'?",
+    "options": ["Ernest Hemingway", "F. Scott Fitzgerald", "Mark Twain", "J.D. Salinger"],
+    "answer": 1,
+    "difficulty": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which programming language is primarily used for iOS development?",
+    "options": ["Java", "Swift", "Kotlin", "Python"],
+    "answer": 1,
+    "difficulty": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who was the lead singer of Nirvana?",
+    "options": ["Eddie Vedder", "Kurt Cobain", "Dave Grohl", "Chris Cornell"],
+    "answer": 1,
+    "difficulty": 0
+  },
+  {
+    "category": "History",
+    "question": "Which ancient civilization built the pyramids?",
+    "options": ["Romans", "Greeks", "Egyptians", "Mayans"],
+    "answer": 2,
+    "difficulty": 0
+  },
+  {
+    "category": "General knowledge",
+    "question": "Which element has the chemical symbol 'O'?",
+    "options": ["Oxygen", "Gold", "Silver", "Iron"],
+    "answer": 0,
+    "difficulty": 0
+  },
+  {
+    "category": "Movies",
+    "question": "What is the highest-grossing movie of all time (as of 2024)?",
+    "options": ["Avatar", "Titanic", "Avengers: Endgame", "The Lion King"],
+    "answer": 0,
+    "difficulty": 2
+  },
+  {
+    "category": "Technology",
+    "question": "Which company created the Linux operating system?",
+    "options": ["Microsoft", "Apple", "IBM", "Linus Torvalds"],
+    "answer": 3,
+    "difficulty": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the most abundant gas in Earth's atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    "answer": 1,
+    "difficulty": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many rings are in the Olympic flag?",
+    "options": ["3", "4", "5", "6"],
+    "answer": 2,
+    "difficulty": 0
+  }
 ]

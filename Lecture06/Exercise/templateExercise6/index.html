@@ -1,28 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multiple Choice Quiz</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container mt-5">
-    <div id="player-input" class="mb-4">
-      <!-- Place the player name input here -->
-    </div>
-    <div id="quiz-container" class="card" style="display: none;">
-      <div class="card-body">
-        <h1 class="card-title text-center">Quiz</h1>
-        <!-- Place the question, the options and the results here -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiple Choice Quiz</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div id="player-input" class="mb-4 text-center" style="display: block">
+        <input
+          class="input"
+          type="text"
+          id="player-name"
+          placeholder="Username"
+        />
+        <button class="btn btn-primary" id="start-game-button" disabled>
+          Start Game
+        </button>
+      </div>
+      <div id="quiz-container" class="card" style="display: none">
+        <div class="card-body" id="quiz-questions" style="display: none">
+          <h1 class="card-title text-center">Quiz</h1>
+          <h2 class="card-subtitle mb-2 text-muted text-center h3">
+            [<span id="title-category">Category</span>]
+            <span id="title-question">Question</span> Difficulty:
+            <span id="title-difficulty">easy</span>
+          </h2>
+
+          <hr />
+
+          <div class="row mt-4">
+            <button class="btn btn-primary col mx-4 p-2" id="option-1">
+              option 1
+            </button>
+            <button class="btn btn-primary col mx-4 p-2" id="option-2">
+              option 2
+            </button>
+          </div>
+          <div class="row my-4">
+            <button class="btn btn-primary col mx-4 p-2" id="option-3">
+              option 3
+            </button>
+            <button class="btn btn-primary col mx-4 p-2" id="option-4">
+              option 4
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="card-body text-center"
+          id="quiz-score"
+          style="display: block"
+        >
+          <h1 class="">Score</h1>
+          <h2 id="score-percent">20.40%</h2>
+          <div class="h3">
+            <span id="total-collected-points">12</span>/<span id="max-points">
+              23
+            </span>
+            Points
+          </div>
+
+          <div id="categories-container"></div>
+          <div id="questions-container"></div>
+
+          <button id="new-game" class="btn btn-danger mt-2">New Player</button>
+        </div>
+      </div>
+      <div id="leaderboard" class="mt-5">
+        <h2 class="text-center">Leaderboard</h2>
+        <div id="leaderboard-container">
+          <div class="card p-2 my-2">Name: Points 2 (40%)</div>
+          <div class="card p-2 my-2">Name: Points 2 (40%)</div>
+          <div class="card p-2 my-2">Name: Points 2 (40%)</div>
+        </div>
       </div>
     </div>
-    <div id="leaderboard" class="mt-5">
-      <h2>Leaderboard</h2>
-      <!-- Place the leaderboard list here -->
-    </div>
-  </div>
-  <script type="module" src="dist/main.js"></script>
-</body>
+    <script type="module" src="dist/main.js"></script>
+  </body>
 </html>
