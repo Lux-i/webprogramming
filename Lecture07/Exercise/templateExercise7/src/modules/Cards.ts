@@ -1,0 +1,53 @@
+import { shuffleArray } from "./Util";
+
+const cardIcons = ["💯", "💸", "🤣", "💀", "🤮", "❤", "🎶", "🔥"];
+
+export default class CardManager {
+  private cardContainer: HTMLElement;
+  private pairAmount: number;
+  private cardAmount: number;
+
+  /**
+   * @param cardContainer The HTMLElement that should contain all the cards
+   * @param pairAmount The desired amount of pairs the game should have
+   */
+  constructor(cardContainer: HTMLElement, pairAmount: number) {
+    if (pairAmount > cardIcons.length) {
+      alert(
+        `The amount of pairs will be set to the maximum of ${cardIcons.length},
+        because your desired amount of ${pairAmount} pairs exceeds the implemented limit`
+      );
+      pairAmount = cardIcons.length;
+    }
+    this.cardContainer = cardContainer;
+    this.pairAmount = pairAmount;
+    this.cardAmount = pairAmount * 2;
+  }
+
+  /**
+   * @returns The array of generated cards
+   */
+  renderCards = (): HTMLElement[] => {
+    //reset cardContainer
+    this.cardContainer.innerHTML = "";
+
+    //create icon array
+    //a random selection of icons is made (important when pairAmount != 8)
+    const usedIcons = shuffleArray([...cardIcons]).slice(0, this.pairAmount);
+    //we then create a randomly shuffled array of the used icons times 2 (pairs)
+    const shuffledArray = shuffleArray(usedIcons.concat(usedIcons));
+
+    //create cards and append to container
+    let cards: HTMLElement[] = [];
+    for (let i = 0; i < this.cardAmount; i++) {
+      const newCard = document.createElement("Card");
+      const cardText = document.createElement("p");
+      cardText.innerHTML = shuffledArray[i];
+      newCard.appendChild(cardText);
+      this.cardContainer.appendChild(newCard);
+      cards.push(newCard);
+    }
+    //return card array to assign onclick listener in main scope
+    return cards;
+  };
+}
