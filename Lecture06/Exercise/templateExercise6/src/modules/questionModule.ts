@@ -13,7 +13,7 @@ export class QuestionModule {
   private isSuccess = false;
   private isError = false;
   //#endregion
-  onsuccess: Function = () => { };
+  onsuccess: Function = () => {};
 
   constructor() {
     this.fetchQuestions();
@@ -70,7 +70,9 @@ export class QuestionModule {
 
     const threshold = amount / difficultyLevelAmount;
 
-    const counts = new Array(difficultyLevelAmount); //Array storing the amount of questions added per difficutly, with the difficulty as index
+    //Array storing the amount of questions added per difficutly, with the difficulty as index
+    const counts = new Array(difficultyLevelAmount);
+
     counts.fill(0);
 
     for (let i = 0; i < amount; i++) {
