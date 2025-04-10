@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Game</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">  
-</head>
-<body>
-    <div class="container">
-        <h1 class="text-center my-4">Memory Game</h1>
-        <div class="row justify-content-center my-4">
-            <div class="d-flex align-items-center">
-                <!-- Buttons and Input will go here -->
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Memory Game</h1>
+      <h2 id="tracker">Pairs found: 0 | Tries: 0</h2>
+    </header>
+    <game>
+      <section id="cards_container"></section>
+    </game>
+    <section id="overlay" class="flex-column center">
+      <form class="flex-column center" id="form" action="javascript:void(0)">
+        <select id="modeSelect">
+          <option>Singleplayer</option>
+          <option>Multiplayer</option>
+        </select>
+        <div class="flex margin-top center">
+          <label for="pairs">Pairs:</label>
+          <input
+            type="number"
+            id="pairs"
+            name="pairs"
+            max="8"
+            min="1"
+            value="8"
+            required />
         </div>
-        <div id="game-board" class="row justify-content-center"></div>
-        <div id="score-board" class="row justify-content-center my-4"></div>
-    </div>  
-    <script type="module" src="dist/index.js"></script>
-
-</div>
-</body>
+        <div class="flex margin-top center">
+          <label for="name1">Player1:</label>
+          <input type="text" id="name1" name="name1" required />
+        </div>
+        <div class="flex margin-top center" id="player2">
+          <label for="name2">Player2:</label>
+          <input type="text" id="name2" name="name2" />
+        </div>
+        <input type="submit" id="start" class="margin-top" value="Start Game" />
+      </form>
+    </section>
+  </body>
+  <script type="text/javascript" src="index.js"></script>
 </html>
