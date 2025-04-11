@@ -1,4 +1,4 @@
-import { shuffleArray } from "./Util";
+import { shuffleArray } from "./Util.js";
 const cardIcons = ["💯", "💸", "🤣", "💀", "🤮", "❤", "🎶", "🔥"];
 export default class CardManager {
     /**

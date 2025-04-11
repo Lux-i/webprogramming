@@ -103,8 +103,8 @@ restart_button.onclick = () => {
 };
 
 renderCards();*/
-import CardManager from "./modules/Cards";
-import PlayerManager from "./modules/Players";
+import CardManager from "./modules/Cards.js";
+import PlayerManager from "./modules/Players.js";
 let inTimeout = false;
 // the first selected card of a selection pair
 let match = null;
@@ -155,11 +155,16 @@ window.onload = () => {
         tracker.innerHTML = `Pairs found: ${pairsFound} | Tries: ${tries}`;
     };
     const startGame = () => {
-        console.log("button clicked");
-        overlay.hidden = true;
+        let name2 = name2Input.value;
+        if (modeSelector.value == "Multiplayer" && name2 == "") {
+            return alert("Missing player2's name!");
+        }
         const pairAmount = Number.parseInt(pairInput.value);
         const cardManager = new CardManager(cardsContainer, pairAmount);
-        playerManager = new PlayerManager({}, name1Input.value, name2Input.value);
+        overlay.style.display = "none";
+        if (modeSelector.value == "Singleplayer")
+            name2 = null;
+        playerManager = new PlayerManager({}, name1Input.value, name2);
         const cards = cardManager.renderCards();
         cards.forEach((card) => {
             card.onclick = () => {
@@ -178,7 +183,5 @@ window.onload = () => {
             };
         });
     };
-    startButton.onclick = () => {
-        startGame();
-    };
+    startButton.onclick = startGame;
 };

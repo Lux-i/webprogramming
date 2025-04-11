@@ -104,8 +104,8 @@ restart_button.onclick = () => {
 
 renderCards();*/
 
-import CardManager from "./modules/Cards";
-import PlayerManager from "./modules/Players";
+import CardManager from "./modules/Cards.js";
+import PlayerManager from "./modules/Players.js";
 
 let inTimeout = false;
 
@@ -166,15 +166,22 @@ window.onload = () => {
   };
 
   const startGame = () => {
-    console.log("button clicked");
-    overlay.hidden = true;
+    let name2: string | null = name2Input.value;
+
+    if (modeSelector.value == "Multiplayer" && name2 == "") {
+      return alert("Missing player2's name!");
+    }
 
     const pairAmount = Number.parseInt(pairInput.value);
     const cardManager = new CardManager(cardsContainer, pairAmount);
+
+    overlay.style.display = "none";
+
+    if (modeSelector.value == "Singleplayer") name2 = null;
     playerManager = new PlayerManager(
       {} as HTMLElement,
       name1Input.value,
-      name2Input.value
+      name2
     );
 
     const cards = cardManager.renderCards();
@@ -194,7 +201,5 @@ window.onload = () => {
     });
   };
 
-  startButton.onclick = () => {
-    startGame();
-  };
+  startButton.onclick = startGame;
 };
