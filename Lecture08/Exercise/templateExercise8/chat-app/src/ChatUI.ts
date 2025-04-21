@@ -1,11 +1,10 @@
 ﻿// src/ChatUI.ts
 
-import { ApiService } from "./ApiService";
-import { StateManager } from "./StateManager";
-import type { User, ApiResponse } from "./ApiService";
+import { ApiService } from "./ApiService.js";
+import { StateManager } from "./StateManager.js";
+import type { User, ApiResponse } from "./ApiService.js";
 
 export class ChatUI {
-
   constructor() {
     this.initEventListeners();
   }
@@ -32,7 +31,9 @@ export class ChatUI {
     // 4) Send Message
     const sendForm = document.getElementById("sendForm");
     if (sendForm) {
-      sendForm.addEventListener("submit", (event) => this.handleSendMessage(event));
+      sendForm.addEventListener("submit", (event) =>
+        this.handleSendMessage(event)
+      );
     }
   }
 
@@ -43,10 +44,18 @@ export class ChatUI {
     event.preventDefault();
     const regResultDiv = document.getElementById("registerResult");
 
-    const name     = (document.getElementById("regName")   as HTMLInputElement).value.trim();
-    const email    = (document.getElementById("regEmail")  as HTMLInputElement).value.trim();
-    const pass     = (document.getElementById("regPass")   as HTMLInputElement).value.trim();
-    const group    = (document.getElementById("regGroup")  as HTMLInputElement).value.trim();
+    const name = (
+      document.getElementById("regName") as HTMLInputElement
+    ).value.trim();
+    const email = (
+      document.getElementById("regEmail") as HTMLInputElement
+    ).value.trim();
+    const pass = (
+      document.getElementById("regPass") as HTMLInputElement
+    ).value.trim();
+    const group = (
+      document.getElementById("regGroup") as HTMLInputElement
+    ).value.trim();
 
     try {
       if (regResultDiv) regResultDiv.textContent = "Registering ...";
@@ -60,7 +69,9 @@ export class ChatUI {
         (event.target as HTMLFormElement).reset();
       } else {
         if (regResultDiv) {
-          regResultDiv.textContent = `Registration failed: ${response.error || "Unknown error"}`;
+          regResultDiv.textContent = `Registration failed: ${
+            response.error || "Unknown error"
+          }`;
         }
       }
     } catch (err) {
@@ -76,8 +87,12 @@ export class ChatUI {
     event.preventDefault();
     const loginResultDiv = document.getElementById("loginResult");
 
-    const usernameOrEmail = (document.getElementById("loginUser") as HTMLInputElement).value.trim();
-    const password        = (document.getElementById("loginPass") as HTMLInputElement).value.trim();
+    const usernameOrEmail = (
+      document.getElementById("loginUser") as HTMLInputElement
+    ).value.trim();
+    const password = (
+      document.getElementById("loginPass") as HTMLInputElement
+    ).value.trim();
 
     try {
       if (loginResultDiv) loginResultDiv.textContent = "Logging in ...";
@@ -92,12 +107,15 @@ export class ChatUI {
         (event.target as HTMLFormElement).reset();
       } else {
         if (loginResultDiv) {
-          loginResultDiv.textContent = `Login failed: ${response.error || "Unknown error"}`;
+          loginResultDiv.textContent = `Login failed: ${
+            response.error || "Unknown error"
+          }`;
         }
       }
     } catch (err) {
       console.error("handleLogin Error:", err);
-      if (loginResultDiv) loginResultDiv.textContent = "Network or server error.";
+      if (loginResultDiv)
+        loginResultDiv.textContent = "Network or server error.";
     }
   }
 
@@ -129,7 +147,8 @@ export class ChatUI {
       }
     } catch (err) {
       console.error("handleGetUsers Error:", err);
-      if (usersList) usersList.innerHTML = "Network or server error while loading users.";
+      if (usersList)
+        usersList.innerHTML = "Network or server error while loading users.";
     }
   }
 
@@ -140,24 +159,39 @@ export class ChatUI {
     event.preventDefault();
     const sendResultDiv = document.getElementById("sendResult");
 
-    const senderId   = (document.getElementById("senderId")   as HTMLInputElement).value.trim();
-    const receiverId = (document.getElementById("receiverId") as HTMLInputElement).value.trim();
-    const message    = (document.getElementById("messageText")as HTMLInputElement).value.trim();
+    const senderId = (
+      document.getElementById("senderId") as HTMLInputElement
+    ).value.trim();
+    const receiverId = (
+      document.getElementById("receiverId") as HTMLInputElement
+    ).value.trim();
+    const message = (
+      document.getElementById("messageText") as HTMLInputElement
+    ).value.trim();
 
     try {
       if (sendResultDiv) sendResultDiv.textContent = "Sending message ...";
-      const response = await ApiService.sendMessage(senderId, receiverId, message);
+      const response = await ApiService.sendMessage(
+        senderId,
+        receiverId,
+        message
+      );
       if (response.success) {
-        if (sendResultDiv) sendResultDiv.textContent = "Message successfully sent!";
+        if (sendResultDiv)
+          sendResultDiv.textContent = "Message successfully sent!";
         (event.target as HTMLFormElement).reset();
       } else {
         if (sendResultDiv) {
-          sendResultDiv.textContent = `Error: ${response.error || "Unknown error"}`;
+          sendResultDiv.textContent = `Error: ${
+            response.error || "Unknown error"
+          }`;
         }
       }
     } catch (err) {
       console.error("handleSendMessage Error:", err);
-      if (sendResultDiv) sendResultDiv.textContent = "Network or server error while sending message.";
+      if (sendResultDiv)
+        sendResultDiv.textContent =
+          "Network or server error while sending message.";
     }
   }
 }
