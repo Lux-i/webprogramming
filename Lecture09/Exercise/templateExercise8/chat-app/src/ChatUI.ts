@@ -2,7 +2,8 @@
 
 import { ApiService } from "./ApiService.js";
 import { StateManager } from "./StateManager.js";
-import type { User, ApiResponse } from "./ApiService.js";
+const { TokenManager } = StateManager;
+import { User } from "./types.js";
 
 export class ChatUI {
   constructor() {
@@ -99,7 +100,7 @@ export class ChatUI {
       const response = await ApiService.loginUser(usernameOrEmail, password);
       if (response.token) {
         // Save the token in StateManager
-        StateManager.setToken(response.token);
+        TokenManager.setToken(response.token);
 
         if (loginResultDiv) {
           loginResultDiv.textContent = `Login successful! Token: ${response.token}`;

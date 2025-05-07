@@ -1,24 +1,57 @@
-﻿// src/StateManager.ts
+﻿import type { User, Chat, Message } from "./types.js";
 
-import type { User } from "./ApiService.js";
+export namespace StateManager {
+  let _token: string | null = null;
+  let _currentUser: User | null = null;
+  let _currentChat: Chat | null = null;
 
-export class StateManager {
-  private static _token: string | null = null;
-  private static _currentUser: User | null = null;
+  export namespace TokenManager {
+    export function setToken(token: string | null) {
+      _token = token;
+    }
 
-  static setToken(token: string | null) {
-    this._token = token;
+    export function getToken(): string | null {
+      return _token;
+    }
   }
 
-  static getToken(): string | null {
-    return this._token;
+  export namespace UserManager {
+    export function setUser(user: User | null) {
+      _currentUser = user;
+    }
+
+    export function getUser(): User | null {
+      return _currentUser;
+    }
   }
 
-  static setCurrentUser(user: User | null) {
-    this._currentUser = user;
-  }
+  export namespace ChatManager {
+    export function setChatUser(user: User | null): void {
+      if (!user) {
+        _currentChat = null;
+      } else {
+        _currentChat = { user, messages: [] };
+      }
+    }
 
-  static getCurrentUser(): User | null {
-    return this._currentUser;
+    export function getChatUser(): User | null {
+      return _currentChat?.user || null;
+    }
+
+    export function addMessage(message: Message): void {
+      if (_currentChat) {
+        _currentChat.messages = [..._currentChat.messages, message];
+      }
+    }
+
+    export function addMessages(messages: Message[]): void {
+      if (_currentChat) {
+        _currentChat.messages = [..._currentChat.messages, ...messages];
+      }
+    }
+
+    export function getMessages(): Message[] | null {
+      return _currentChat?.messages || null;
+    }
   }
 }

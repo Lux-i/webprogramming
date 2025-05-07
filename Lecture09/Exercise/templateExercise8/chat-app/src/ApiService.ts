@@ -1,17 +1,10 @@
-﻿// src/ApiService.ts
+﻿import { User } from "./types";
 
 export interface ApiResponse {
   success?: boolean;
   error?: string;
   id?: string;
   token?: string;
-}
-
-// Example user type
-export interface User {
-  id: string;
-  name: string;
-  group_id: string;
 }
 
 const BASE_URL = "http://webp-ilv-backend.cs.technikum-wien.at/messenger";
