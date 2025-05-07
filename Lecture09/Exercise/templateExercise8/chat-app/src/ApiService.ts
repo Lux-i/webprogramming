@@ -1,4 +1,6 @@
-﻿import { User } from "./types";
+﻿import { Message, User } from "./types";
+import { StateManager } from "./StateManager.js";
+const { ChatManager } = StateManager;
 
 export interface ApiResponse {
   success?: boolean;
@@ -140,5 +142,37 @@ export class ApiService {
       body: formData,
     });
     return resp.json();
+  }
+
+  static async getMessages(): Promise<Message[]> {
+    const params: string[] = [];
+
+    // If we have a token, add it
+    if (this.token) {
+      params.push(`token=${this.token}`);
+    }
+
+    // If we have the registered user ID, add it
+    if (this.registeredUserId) {
+      params.push(`user1_id=${this.registeredUserId}`);
+    }
+
+    const user2: User | null = ChatManager.getChatUser();
+
+    if (user2) {
+      params.push(`user2_id=${user2.id}`);
+    }
+
+    const queryString = params.length > 0 ? "?" + params.join("&") : "";
+
+    const url = `${BASE_URL}/get_conversation.php${queryString}`;
+
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (Array.isArray(data)) {
+      return data;
+    } else {
+      return [];
+    }
   }
 }

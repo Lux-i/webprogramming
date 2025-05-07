@@ -1,25 +1,140 @@
-﻿/* public/styles.css */
-
 body {
-    font-family: sans-serif;
-    margin: 1rem;
-  }
-  
-  h1, h2 {
-    color: #333;
-  }
-  
-  section {
-    margin-bottom: 2rem;
-  }
-  
-  label {
-    display: inline-block;
-    width: 120px;
-    margin-bottom: 8px;
-  }
-  
-  input {
-    margin-bottom: 8px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+
+  background-color: #f5f7fa;
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#sidebar {
+  height: 100vh;
+  width: 20vw;
+  text-align: center;
+  border-right: solid black 2px;
+  background-color: rgb(247, 253, 255);
+}
+
+#user-list {
+  height: 45vh;
+  overflow-y: scroll;
+}
+
+#user-list p {
+  font-size: x-large;
+}
+
+#chat-container {
+  height: 90vh;
+  width: 80vw;
+
+  padding-bottom: 10vh;
+}
+
+#chat {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+#sendMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;
+  height: 10vh;
+  position: absolute;
+  bottom: 0;
+
+  border: solid black 2px;
+
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+
+  background-color: rgb(247, 253, 255);
+}
+
+#sendForm {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+
+#sendForm input {
+  width: 100%;
+  font-size: x-large;
+  margin-right: 1em;
+}
+
+#sendForm button {
+  font-size: x-large;
+  background-color: white;
+  border: solid black 1px;
+  border-radius: 15px;
+  padding: 0.3em;
+}
+
+#messages {
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+.timestamp {
+  color: #7d8b99;
+}
+
+.messageContainer {
+  display: flex;
+}
+
+.message {
+  background-color: #dcf8c6;
+  padding: 1em 0 1em 2em;
+  width: 15vw;
+  border-radius: 20px;
+  margin-bottom: 1vw;
+  color: #1c1e21;
+}
+
+.message-sent {
+  justify-content: flex-end;
+}
+
+.message-received {
+  justify-content: flex-start;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}

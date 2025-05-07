@@ -9,31 +9,104 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { ApiService } from "./ApiService.js";
-import { StateManager } from "./StateManager.js";
+import { StateManager, stateEvents } from "./StateManager.js";
+const { TokenManager, UserManager, ChatManager, UserRegistry } = StateManager;
 export class ChatUI {
     constructor() {
         this.initEventListeners();
+        stateEvents.addEventListener("token", () => __awaiter(this, void 0, void 0, function* () {
+            // 3) Get Users
+            this.handleGetUsers();
+        }));
+        stateEvents.addEventListener("chat", (e) => __awaiter(this, void 0, void 0, function* () {
+            //detail is null or user
+            const eventData = e.detail;
+            const chatElement = document.getElementById("chat");
+            if (!eventData) {
+                chatElement.hidden = true;
+            }
+            else {
+                chatElement.hidden = false;
+                const messages = yield ApiService.getMessages();
+                ChatManager.clearMessages();
+                ChatManager.addMessages(messages);
+            }
+        }));
+        stateEvents.addEventListener("message", () => __awaiter(this, void 0, void 0, function* () {
+            //clear messages
+            const messagesElement = document.getElementById("messages");
+            messagesElement.innerHTML = "";
+            //get messages
+            const messages = ChatManager.getMessages();
+            console.log(messages);
+            if (messages) {
+                messages.forEach((message) => {
+                    var _a, _b, _c;
+                    //build elements
+                    const messageContainer = document.createElement("section");
+                    messageContainer.classList.add("messageContainer");
+                    let username = "";
+                    if (String(message.sender_id) === String((_a = UserManager.getUser()) === null || _a === void 0 ? void 0 : _a.id)) {
+                        messageContainer.classList.add("message-sent");
+                        username = (_b = UserManager.getUser()) === null || _b === void 0 ? void 0 : _b.name;
+                    }
+                    else {
+                        messageContainer.classList.add("message-received");
+                        username = (_c = UserRegistry.getUser(String(message.sender_id))) === null || _c === void 0 ? void 0 : _c.name;
+                    }
+                    const messageElement = document.createElement("section");
+                    messageElement.classList.add("message");
+                    const messageUser = document.createElement("p");
+                    messageUser.classList.add("timestamp"); //egal erfüllt seinen Zweck
+                    messageUser.innerHTML = username;
+                    const messageText = document.createElement("p");
+                    messageText.innerHTML = message.message;
+                    const messageTime = document.createElement("p");
+                    messageTime.classList.add("timestamp");
+                    messageTime.innerHTML = message.timestamp;
+                    //append elements
+                    messageElement.appendChild(messageUser);
+                    messageElement.appendChild(messageText);
+                    messageElement.appendChild(messageTime);
+                    messageContainer.appendChild(messageElement);
+                    messagesElement.appendChild(messageContainer);
+                });
+            }
+            const chatElement = document.getElementById("chat");
+            chatElement.scrollTo({
+                top: chatElement.scrollHeight,
+                behavior: "smooth",
+            });
+        }));
     }
     initEventListeners() {
         // 1) Registration
         const regForm = document.getElementById("registerForm");
         if (regForm) {
-            regForm.addEventListener("submit", (event) => this.handleRegister(event));
+            regForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () { return this.handleRegister(event); }));
         }
         // 2) Login
         const loginForm = document.getElementById("loginForm");
         if (loginForm) {
-            loginForm.addEventListener("submit", (event) => this.handleLogin(event));
-        }
-        // 3) Get Users
-        const loadUsersBtn = document.getElementById("loadUsersBtn");
-        if (loadUsersBtn) {
-            loadUsersBtn.addEventListener("click", () => this.handleGetUsers());
+            loginForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () { return this.handleLogin(event); }));
         }
         // 4) Send Message
         const sendForm = document.getElementById("sendForm");
         if (sendForm) {
-            sendForm.addEventListener("submit", (event) => this.handleSendMessage(event));
+            sendForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () { return this.handleSendMessage(event); }));
+        }
+        const userList = document.getElementById("user-list");
+        if (userList) {
+            userList.addEventListener("click", (event) => __awaiter(this, void 0, void 0, function* () {
+                const userElement = event.target;
+                const userId = userElement.dataset.userid;
+                if (!userId)
+                    return;
+                const user = UserRegistry.getUser(userId);
+                if (!user)
+                    return;
+                ChatManager.setChatUser(user);
+            }));
         }
     }
     // --------------------------------------------------------------------------
@@ -86,9 +159,12 @@ export class ChatUI {
                 const response = yield ApiService.loginUser(usernameOrEmail, password);
                 if (response.token) {
                     // Save the token in StateManager
-                    StateManager.setToken(response.token);
+                    TokenManager.setToken(response.token);
+                    if (response.id) {
+                        UserManager.setUser({ name: "You", id: response.id, group_id: "0" });
+                    }
                     if (loginResultDiv) {
-                        loginResultDiv.textContent = `Login successful! Token: ${response.token}`;
+                        loginResultDiv.textContent = `Login successful!`;
                     }
                     event.target.reset();
                 }
@@ -110,7 +186,7 @@ export class ChatUI {
     // --------------------------------------------------------------------------
     handleGetUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            const usersList = document.getElementById("usersList");
+            const usersList = document.getElementById("user-list");
             if (usersList)
                 usersList.innerHTML = "Loading users...";
             try {
@@ -118,12 +194,14 @@ export class ChatUI {
                 // data can be either an array of User or an {error: string}
                 if (Array.isArray(data)) {
                     // success
+                    UserRegistry.setUsers(data);
                     if (usersList) {
                         usersList.innerHTML = "";
                         data.forEach((user) => {
-                            const li = document.createElement("li");
-                            li.textContent = `User: ${user.name} (ID: ${user.id}), group: ${user.group_id}`;
-                            usersList.appendChild(li);
+                            const p = document.createElement("p");
+                            p.textContent = `${user.name} (ID: ${user.id})`;
+                            p.dataset.userid = user.id;
+                            usersList.appendChild(p);
                         });
                     }
                 }
@@ -146,16 +224,28 @@ export class ChatUI {
     // --------------------------------------------------------------------------
     handleSendMessage(event) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b;
+            console.log("sending message");
             event.preventDefault();
             const sendResultDiv = document.getElementById("sendResult");
-            const senderId = document.getElementById("senderId").value.trim();
-            const receiverId = document.getElementById("receiverId").value.trim();
+            const senderId = (_a = UserManager.getUser()) === null || _a === void 0 ? void 0 : _a.id;
+            const receiverId = (_b = ChatManager.getChatUser()) === null || _b === void 0 ? void 0 : _b.id;
+            console.log(`senderId: ${senderId} | receiverId: ${receiverId}`);
+            if (!senderId || !receiverId)
+                return;
             const message = document.getElementById("messageText").value.trim();
+            console.log("all values set");
             try {
                 if (sendResultDiv)
                     sendResultDiv.textContent = "Sending message ...";
                 const response = yield ApiService.sendMessage(senderId, receiverId, message);
                 if (response.success) {
+                    //the date is set here so the message the user sends can be added to the chat without reloading
+                    //but it will be wrong
+                    //could be replaced with calling getMessages
+                    const messages = yield ApiService.getMessages();
+                    ChatManager.clearMessages();
+                    ChatManager.addMessages(messages);
                     if (sendResultDiv)
                         sendResultDiv.textContent = "Message successfully sent!";
                     event.target.reset();

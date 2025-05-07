@@ -5,10 +5,9 @@ export type User = {
 };
 
 export type Message = {
-  sender: User;
-  receiver: User;
+  sender_id: number;
   message: string;
-  timestamp: number;
+  timestamp: string;
 };
 
 export type Chat = {

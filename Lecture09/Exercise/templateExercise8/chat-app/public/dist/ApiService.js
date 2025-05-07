@@ -1,4 +1,3 @@
-// src/ApiService.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,6 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { StateManager } from "./StateManager.js";
+const { ChatManager } = StateManager;
 const BASE_URL = "http://webp-ilv-backend.cs.technikum-wien.at/messenger";
 export class ApiService {
     // Provide a getter if you want to retrieve it elsewhere
@@ -111,6 +112,33 @@ export class ApiService {
                 body: formData,
             });
             return resp.json();
+        });
+    }
+    static getMessages() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = [];
+            // If we have a token, add it
+            if (this.token) {
+                params.push(`token=${this.token}`);
+            }
+            // If we have the registered user ID, add it
+            if (this.registeredUserId) {
+                params.push(`user1_id=${this.registeredUserId}`);
+            }
+            const user2 = ChatManager.getChatUser();
+            if (user2) {
+                params.push(`user2_id=${user2.id}`);
+            }
+            const queryString = params.length > 0 ? "?" + params.join("&") : "";
+            const url = `${BASE_URL}/get_conversation.php${queryString}`;
+            const resp = yield fetch(url);
+            const data = yield resp.json();
+            if (Array.isArray(data)) {
+                return data;
+            }
+            else {
+                return [];
+            }
         });
     }
 }
